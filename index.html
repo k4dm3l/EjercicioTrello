@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+  ​
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Trello</title>
+
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+  </head>
+  ​
+  <body>
+    <div id="app" class="container mt-5">
+      <div class="row">
+        <div class="col-md-4 mt-3" v-for="(list, index) in lists">
+          <div class="card">
+            <div class="card-header">
+              <div class="d-flex justify-content-between">
+                <h4>{{ list.name }}</h4>
+                <button
+                  :class="list.status == 'creating' ? 'btn-warning' : 'btn-danger' "
+                  class="btn btn-sm"
+                  @click="removeList(index)"
+                >
+                  {{ list.status == "creating" ? "Cancelar" : "Eliminar" }}
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <form @submit.prevent="saveList(list)" action="/">
+                <div class="form-group" v-if="list.status != 'saved'">
+                  <input
+                    class="form-control"
+                    placeholder="Nombre de la lista"
+                    v-model="list.name"
+                  />
+                </div>
+                <button
+                  v-if="list.status != 'saved'"
+                  class="btn btn-primary btn-block"
+                >
+                  Guardar
+                </button>
+              </form>
+
+              <div v-if="list.status == 'saved'" class="card-task">
+                <div v-for="task in list.tasks">
+                  <h3>{{ task.info }}</h3>
+
+                  <div class="form-group">
+                    <input
+                      class="form-control"
+                      placeholder="Agregar Tarea"
+                      v-model="task.info"
+                      disabled
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    placeholder="Agregar Tarea"
+                    :id="'task'+index"
+                    @keyup.enter="addTask(index)"
+                  />
+                </div>
+
+                <button
+                  v-if="list.status == 'saved'"
+                  class="btn btn-success"
+                  @click="addTask(index)"
+                >
+                  Agregar Tarea
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mt-3">
+          <button
+            class="btn rounded-0 btn-outline-dark btn-block"
+            @click="addList"
+          >
+            Agregar lista
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./script.js"></script>
+  </body>
+  ​
+</html>
