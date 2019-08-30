@@ -49,16 +49,30 @@
               </form>
 
               <div v-if="list.status == 'saved'" class="card-task">
-                <div v-for="task in list.tasks">
-                  <h3>{{ task.info }}</h3>
-
-                  <div class="form-group">
+                <div v-for="(task, index) in list.tasks">
+                  <div class="form-group d-flex justify-content-between">
                     <input
-                      class="form-control"
+                      class="form-control m-2"
                       placeholder="Agregar Tarea"
                       v-model="task.info"
                       disabled
                     />
+                    <div class="d-flex justify-content-between m-2">
+                        <!-- Delete Task -->
+                      <button
+                        class="btn btn-danger m-1"
+                        @click="deleteTask(list.tasks, index)"
+                      >
+                      <i class="fas fa-trash"></i>
+                      </button>
+                        <!-- Update Task -->
+                      <button
+                        class="btn btn-primary m-1"
+                        @click="updateTask"
+                      >
+                      <i class="fas fa-redo"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -92,6 +106,9 @@
         </div>
       </div>
     </div>
+
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/675105a60e.js"></script>
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="./script.js"></script>
