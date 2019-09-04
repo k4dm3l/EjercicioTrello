@@ -52,13 +52,14 @@
                 <div v-for="(task, index) in list.tasks">
                   <div class="form-group d-flex justify-content-between">
                     <input
-                      class="form-control m-2"
+                      class="form-control m-1"
                       placeholder="Agregar Tarea"
                       v-model="task.info"
                       :id="'taskSaved'+index"
-                      disabled
+                      readonly
+                      @click="editTaskInput('taskSaved'+index, task)"
                     />
-                    <div class="d-flex justify-content-between m-2">
+                    <div class="d-flex justify-content-between m-1" v-if="task.saved == false">
                         <!-- Delete Task -->
                       <button
                         class="btn btn-danger m-1"
@@ -69,7 +70,7 @@
                         <!-- Update Task -->
                       <button
                         class="btn btn-primary m-1"
-                        @click="updateTask"
+                        @click="updateTask('taskSaved'+index, task)"
                       >
                       <i class="fas fa-redo"></i>
                       </button>
@@ -94,6 +95,7 @@
                   Agregar Tarea
                 </button>
               </div>
+
             </div>
           </div>
         </div>

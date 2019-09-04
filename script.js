@@ -26,7 +26,8 @@ let app = new Vue({
         addTask(index){
             const info = document.getElementById('task'+index).value;
             const newTask = {
-                info: info
+                info: info,
+                saved: true
             };
             
             if(this.verifyEmptyTask(newTask)){
@@ -39,8 +40,16 @@ let app = new Vue({
         deleteTask(tasks, index){
             tasks.splice(index, 1);
         },
-        updateTask(){
-            alert('Here UPDATE task');
+        editTaskInput(elementId, task){
+            const input = document.getElementById(elementId);
+            task.saved = false;
+            input.readOnly = false;
+        },
+        updateTask(elementId, task){
+            const input = document.getElementById(elementId);
+            task.saved = true;
+            alert('Task info updated!');
+            input.readOnly = true;
         },
         verifyEmptyTask(task){
             if(task.info == ''){
