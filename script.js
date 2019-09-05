@@ -1,8 +1,13 @@
-let app = new Vue({
+import InputTask from './components/inputTask.js'
+
+new Vue({
     el: '#app',
     data: {
         lists: [ ]
-    }, 
+    },
+    components: {
+        InputTask
+    },
     methods: {
         addList() {
             const newList = {

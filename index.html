@@ -16,6 +16,7 @@
   ​
   <body>
     <div id="app" class="container mt-5">
+      <input-task></input-task>
       <div class="row">
         <div class="col-md-4 mt-3" v-for="(list, index) in lists">
           <div class="card">
@@ -48,6 +49,7 @@
                 </button>
               </form>
 
+              <!-- CARD COMPONENT -->
               <div v-if="list.status == 'saved'" class="card-task">
                 <div v-for="(task, index) in list.tasks">
                   <div class="form-group d-flex justify-content-between">
@@ -95,6 +97,7 @@
                   Agregar Tarea
                 </button>
               </div>
+              <!-- CARD COMPONENT -->
 
             </div>
           </div>
@@ -114,7 +117,7 @@
     <script src="https://kit.fontawesome.com/675105a60e.js"></script>
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="./script.js"></script>
+    <script type="module" src="./script.js"></script>
   </body>
   ​
 </html>
